@@ -1,0 +1,106 @@
+.admin-product-container {
+  border: 1px solid rgb(214, 214, 214);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    input {
+      width: 500px;
+      padding: 20px;
+      background-color: #FAFAFA;
+      border: none;
+    }
+
+    .form-group-product{
+      display: flex;
+      flex-direction: column;
+  
+    }
+    .admin-product-details-info {
+      margin-top: 40px;
+      max-width: 80%;
+      margin: 0 auto;
+      margin-top: 5rem;
+      margin-bottom: 2.5rem;
+      
+      .top {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid;
+      }
+      }
+
+    .admin-product-image {
+      margin-left: 15%;
+      width: 501px;
+      height: 430px;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+    .btn{
+      width: 100%;
+
+      margin-top: 15px;
+    }
+
+   .btn-admin-change{
+    background-color: #FA3150;
+    color: white;
+   }
+    .btn-admin-delete{
+      background-color: black;
+      color: white;
+    }
+  
+  }
+
+  
+  
+  .additional-info-container {
+    display: grid;
+    margin: 50px auto;
+    grid-gap: 20px;
+    max-width: 80%;
+    border-bottom: 1px solid rgb(214, 214, 214);
+    padding-bottom: 40px;
+    margin: 0 auto;
+  
+    .button-row {
+      display: flex;
+      width: 100%;
+      
+      .tab-button {
+        text-transform: uppercase;
+        flex-basis: 25%;
+        padding:1em 2.2em;
+        background: none;
+        border: 1px solid rgb(190, 188, 188);
+        margin: 15px 0px;
+        cursor:pointer;
+        &:hover{
+          color:white;
+          background: rgba(248, 19, 49, 0.829);
+        }
+      }
+  }
+  
+    .tab-text {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .text-and-image {
+      display: flex;
+      margin-top: 20px;
+      p {
+        margin-right: 20px;
+      }
+      img{
+        margin-top:0px;
+      }
+    }
+  }
