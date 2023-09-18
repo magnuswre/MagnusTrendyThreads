@@ -2,7 +2,9 @@ import React from 'react'
 
 const DeletedProduct = () => {
   return (
-    <div>Product successfully deleted</div>
+    <div className='deleted-product'> 
+      <h1>Product Successfully Deleted!</h1>
+    </div>
   )
 }
 

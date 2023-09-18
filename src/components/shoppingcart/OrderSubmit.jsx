@@ -2,7 +2,9 @@ import React from 'react'
 
 const OrderSubmit = () => {
   return (
-    <div>Thank you for you order! Welcome back!</div>
+    <div className='order-submit-component'>
+     <h1>Thank You For Your Order! Welcome Back!</h1> 
+      </div>
   )
 }
 

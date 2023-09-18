@@ -8,7 +8,6 @@ const CartDropdown = () => {
     const location = useLocation()
   const { totalQuantity } = useContext(CartContext);
 
-//   if(location.pathname === "/checkout") return null
   return (
      
     <li className='nav-item dropdown'> 

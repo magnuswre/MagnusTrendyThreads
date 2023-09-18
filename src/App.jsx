@@ -26,19 +26,20 @@ import OrderSubmit from './components/shoppingcart/OrderSubmit'
 import { AdminContext } from './contexts/AdminContext'
 import DeletedProduct from './pages/admin/DeletedProduct'
 import ChangedProduct from './pages/admin/ChangedProduct'
-// import ProductDetailsProvider from './contexts/ProductDetailContext'
+import ProductDetailsProvider from './contexts/ProductDetailContext'
 import ProductContextProvider from './contexts/ProductContext'
 import AdminOrderContextProvider from './contexts/AdminOrderContext'
+import AddedProduct from './pages/admin/AddedProduct'
 
 
 
 const App = () => {
 
   const { user } = useContext(UserContext)
-  console.log(user)
+  // console.log(user)
 
   const { admin } = useContext(AdminContext)
-  console.log(admin)
+  // console.log(admin)
 
   
  return (
@@ -68,7 +69,11 @@ const App = () => {
            </OrderContextProvider>} />
         
          
-        <Route path='/productdetails/:productId' element={<ProductDetails />} />
+        <Route path='/productdetails/:productId' element={
+          <ProductDetailsProvider>
+            <ProductDetails />
+          </ProductDetailsProvider>} />
+       
         <Route path='/adminlogin' element={<AdminLogin />}/>
          
         <Route path='/adminpage' element={
@@ -102,11 +107,18 @@ const App = () => {
           </Protected> 
           }/>
 
+
+         <Route path='/addedproduct' element={
+           <Protected admin={admin} >
+            {/* <ProductDetailsProvider> */}
+                <AddedProduct /> 
+              {/* </ProductDetailsProvider> */}
+          </Protected> 
+          }/>
+
         <Route path='/changedproduct' element={
           <Protected admin={admin} >
-            <ProductContextProvider>
               <ChangedProduct />  
-              </ProductContextProvider>
           </Protected> 
           }/>
 

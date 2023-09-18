@@ -14,14 +14,17 @@ const UserProfile = () => {
   return (
     
     <div className="orders">
+      <h2>Current Order:</h2>
      <div className='active-order'>
+     
       {
        <ShoppingCartUserProfile />
       }
      </div>
      <div className='historic-orders'>
+     <h4>Historic Orders:</h4>
       {orders.map(order => (
-        <div key={order._id}>
+        <div className='order-item' key={order._id}>
           <h3>Order ID: {order._id}</h3>
           <h4>Order Rows:</h4>
           <ul>

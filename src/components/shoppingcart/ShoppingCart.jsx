@@ -18,11 +18,11 @@ const ShoppingCart = ({ closeDropdown }) => {
 
   const handleClearCart = () => {
     clearCart();
-    toggleDropdown();
+    // toggleDropdown();
   };
 
   const handleCheckout = () => {
-    setIsToggled(!isToggled);
+    // setIsToggled(!isToggled);
     checkOut();
   };
 

@@ -2,17 +2,15 @@ import { createContext, useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
 
-export const ProductContext = createContext()
+export const ProductContext = createContext();
 
-const ProductContextProvider = ({ children, limit,  }) => {
-
-  const navigate = useNavigate()
+const ProductContextProvider = ({ children, limit }) => {
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
-  const { productId } = useParams() 
-  const [resultData, setResultData] = useState({})
+  const [resultData, setResultData] = useState({});
+  const { productId } = useParams();
 
- 
- useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const result = await axios.get(`http://localhost:8080/api/product?limit=${limit}`);
@@ -35,73 +33,67 @@ const ProductContextProvider = ({ children, limit,  }) => {
     }
   };
 
-
   const changeProduct = async (formData) => {
-    const token = localStorage.getItem('admin-token') 
-    const parse = JSON.parse(token)
+    const token = localStorage.getItem('admin-token');
+    const parse = JSON.parse(token);
 
-    const fetchData = async () => {
-        try {
-          const result = await axios.put(`http://localhost:8080/api/product/${productId}`, formData,    
-           {
-              headers: {
-                Authorization: `Bearer ${parse}`
-              }
-            })
-            console.log(formData)
-            setResultData(formData)
-          } catch (error) {
-          console.log("Error fetching data:", error);
-        }
-      };
-      
-      fetchData()
-      navigate(('/changedproduct'))
-  }
+    try {
+      const result = await axios.put(`http://localhost:8080/api/product/${productId}`, formData, {
+        headers: {
+          Authorization: `Bearer ${parse}`,
+        },
+      });
+      console.log(formData);
+      setResultData(result.data);
+      navigate('/changedproduct');
+    } catch (error) {
+      console.log('Error fetching data:', error);
+    }
+  };
 
-    const postProduct = async (formData) => {
-     const token = localStorage.getItem('admin-token') 
-     const parse = JSON.parse(token)
- 
-     const fetchData = async () => {
-         try {
-           const result = await axios.post(`http://localhost:8080/api/product/add`, formData,    
-            {
-               headers: {
-                 Authorization: `Bearer ${parse}`
-               }
-             })
-             console.log(result.data)
-             
-             
-           } catch (error) {
-           console.log("Error fetching data:", error);
-         }
-       };
-       fetchData();
-   }
+  const postProduct = async (formData) => {
+    const token = localStorage.getItem('admin-token');
+    const parse = JSON.parse(token);
+
+    try {
+      const result = await axios.post(`http://localhost:8080/api/product/add`, formData, {
+        headers: {
+          Authorization: `Bearer ${parse}`,
+        },
+      });
+
+      setResultData(result.data);
+      console.log(result.data); // This will show the updated value
+      navigate('/addedproduct');
+    } catch (error) {
+      console.log('Error fetching data:', error);
+    }
+  };
+
+  
+
+
+
+
+
 
   const deleteProduct = async () => {
-    const token = localStorage.getItem('admin-token') 
-     const parse = JSON.parse(token)
+    const token = localStorage.getItem('admin-token');
+    const parse = JSON.parse(token);
+
     try {
-      const result = await axios.delete(`http://localhost:8080/api/product/${productId}`, 
-      
-      {
+      const result = await axios.delete(`http://localhost:8080/api/product/${productId}`, {
         headers: {
-          Authorization: `Bearer ${parse}`
-        }
-      }) ;
+          Authorization: `Bearer ${parse}`,
+        },
+      });
       setData(result.data);
       console.log(result.data);
     } catch (error) {
       console.log('Error fetching data:', error);
     }
-    navigate(('/deletedproduct'))
+    navigate('/deletedproduct');
   };
-
-
-
 
   const isLoadMoreDisabled = data.length >= 8;
 
@@ -112,17 +104,14 @@ const ProductContextProvider = ({ children, limit,  }) => {
     changeProduct,
     deleteProduct,
     postProduct,
-    resultData
-    
-
-   
-  }
+    resultData,
+  };
 
   return (
-   <ProductContext.Provider value={value}>
-      { children }
-   </ProductContext.Provider>
-  )
-}
+    <ProductContext.Provider value={value}>
+      {children}
+    </ProductContext.Provider>
+  );
+};
 
-export default ProductContextProvider
+export default ProductContextProvider;

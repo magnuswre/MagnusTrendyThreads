@@ -1,10 +1,8 @@
 import React, { useContext } from 'react';
 import ImagePlaceholder1 from '../../assets/469x356.svg';
-// import { ProductDetailContext } from '../../contexts/ProductDetailContext';
 
 const ProductDetailDesc = () => {
 
-  // const { data } = useContext(ProductDetailContext)
 
   return (
 

@@ -8,15 +8,22 @@
 @import "shoppingcart";
 @import "loader";
 @import "footer";
-@import "adminlogin";
-@import "adminpage";
-@import "adminpagedetails";
-@import "adminorders";
 @import "userprofile";
-@import "infoadmin";
-@import "adminproductdetailscomponent";
-@import "checkout";
 @import "cartdropdown";
+@import "ordersubmit";
+
+
+// ADMIN
+@import "infoadmin";
+@import "admin/adminproductdetailscomponent";
+@import "checkout";
+@import "Admin/adminlogin";
+@import "Admin/adminpage";
+@import "Admin/adminpagedetails";
+@import "Admin/adminorders";
+@import "Admin/deletedproduct";
+
+
 
 
 * {
