@@ -5,7 +5,7 @@ import { ProductContext } from "../../contexts/ProductContext";
 
 const Collection = () => {
   
-  const { data, loadMoreProducts, isLoadMoreDisabled } = useContext(ProductContext)
+  const { data } = useContext(ProductContext)
 
   return (
     <div className='collection-container'>
@@ -40,12 +40,7 @@ const Collection = () => {
           ))
         }
       </div>
-        <button 
-        onClick={loadMoreProducts} 
-        className={`button button-secondary ${isLoadMoreDisabled ? 'disabled' : ''}`}
-        disabled={isLoadMoreDisabled}>
-          load more
-        </button>
+        
     </div>
   )
 }

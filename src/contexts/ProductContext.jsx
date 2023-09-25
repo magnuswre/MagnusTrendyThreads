@@ -1,19 +1,18 @@
 import { createContext, useState, useEffect } from 'react'
 import axios from 'axios'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 
 export const ProductContext = createContext();
 
-const ProductContextProvider = ({ children, limit }) => {
+const ProductContextProvider = ({ children }) => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-  const [resultData, setResultData] = useState({});
-  const { productId } = useParams();
-
+  const [resultData, setResultData] = useState([]);
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await axios.get(`http://localhost:8080/api/product?limit=${limit}`);
+        const result = await axios.get(`http://localhost:8080/api/product`);
         setData(prevData => [...prevData, ...result.data.slice(prevData.length)]);
       } catch (error) {
         console.log('Error fetching data:', error);
@@ -21,35 +20,7 @@ const ProductContextProvider = ({ children, limit }) => {
     };
 
     fetchData();
-  }, [limit]);
-
-  const loadMoreProducts = async () => {
-    try {
-      const result = await axios.get(`http://localhost:8080/api/product?limit=${limit + 4}`);
-      setData(result.data);
-      console.log(result.data);
-    } catch (error) {
-      console.log('Error fetching data:', error);
-    }
-  };
-
-  const changeProduct = async (formData) => {
-    const token = localStorage.getItem('admin-token');
-    const parse = JSON.parse(token);
-
-    try {
-      const result = await axios.put(`http://localhost:8080/api/product/${productId}`, formData, {
-        headers: {
-          Authorization: `Bearer ${parse}`,
-        },
-      });
-      console.log(formData);
-      setResultData(result.data);
-      navigate('/changedproduct');
-    } catch (error) {
-      console.log('Error fetching data:', error);
-    }
-  };
+  }, []);
 
   const postProduct = async (formData) => {
     const token = localStorage.getItem('admin-token');
@@ -62,22 +33,14 @@ const ProductContextProvider = ({ children, limit }) => {
         },
       });
 
-      setResultData(result.data);
-      console.log(result.data); // This will show the updated value
-      navigate('/addedproduct');
+      setResultData(prevData => [...prevData, result.data]);
+      navigate('/addedproduct')
     } catch (error) {
       console.log('Error fetching data:', error);
     }
   };
 
-  
-
-
-
-
-
-
-  const deleteProduct = async () => {
+  const deleteProduct = async (productId) => {
     const token = localStorage.getItem('admin-token');
     const parse = JSON.parse(token);
 
@@ -89,22 +52,17 @@ const ProductContextProvider = ({ children, limit }) => {
       });
       setData(result.data);
       console.log(result.data);
+      navigate('/deletedproduct')
     } catch (error) {
       console.log('Error fetching data:', error);
     }
-    navigate('/deletedproduct');
   };
 
-  const isLoadMoreDisabled = data.length >= 8;
-
-  const value = {
+const value = {
     data,
-    loadMoreProducts,
-    isLoadMoreDisabled,
-    changeProduct,
-    deleteProduct,
-    postProduct,
     resultData,
+    postProduct,
+    deleteProduct
   };
 
   return (

@@ -24,12 +24,10 @@ import AdminOrderDetail from './pages/admin/AdminOrderDetail'
 import Protected from './components/Protected'
 import OrderSubmit from './components/shoppingcart/OrderSubmit'
 import { AdminContext } from './contexts/AdminContext'
-import DeletedProduct from './pages/admin/DeletedProduct'
-import ChangedProduct from './pages/admin/ChangedProduct'
 import ProductDetailsProvider from './contexts/ProductDetailContext'
-import ProductContextProvider from './contexts/ProductContext'
 import AdminOrderContextProvider from './contexts/AdminOrderContext'
 import AddedProduct from './pages/admin/AddedProduct'
+import DeletedProduct from './pages/admin/DeletedProduct'
 
 
 
@@ -110,25 +108,16 @@ const App = () => {
 
          <Route path='/addedproduct' element={
            <Protected admin={admin} >
-            {/* <ProductDetailsProvider> */}
-                <AddedProduct /> 
-              {/* </ProductDetailsProvider> */}
+                   <AddedProduct /> 
           </Protected> 
           }/>
 
-        <Route path='/changedproduct' element={
-          <Protected admin={admin} >
-              <ChangedProduct />  
+         <Route path='/deletedproduct' element={
+           <Protected admin={admin} >
+                   <DeletedProduct />
           </Protected> 
           }/>
 
-        <Route path='/deletedproduct' element={
-          <Protected admin={admin} >
-              <DeletedProduct />  
-          </Protected> 
-          }/>
-
-          
        </Routes>
       <Footer />
     </div>

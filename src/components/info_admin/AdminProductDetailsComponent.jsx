@@ -2,24 +2,30 @@ import React, { useContext, useState } from 'react';
 import { ProductDetailContext } from '../../contexts/ProductDetailContext';
 import ImagePlaceholder1 from '../../assets/469x356.svg';
 import { ProductContext } from '../../contexts/ProductContext';
+import { useParams } from 'react-router-dom';
+import ChangedProductComponent from './ChangedProductComponent';
 
 const AdminProductDetailsComponent = () => {
-  const [formData, setFormDataTwo] = useState([])
-  const { data  } = useContext(ProductDetailContext)
-  const { changeProduct, deleteProduct } = useContext(ProductContext)
+  const [formData, setFormData] = useState([])
+  const [showChangedProduct, setShowChangedProduct] = useState(false)
+  const { data, changeProduct, } = useContext(ProductDetailContext)
+  const { deleteProduct } = useContext(ProductContext)
+  const { productId } = useParams();
 
  const handleChange = (e) =>{
     e.preventDefault()
-    setFormDataTwo(prevData =>{
+    setFormData(prevData =>{
     return {
       ...prevData,
       [e.target.name]: e.target.value
     }
   })
 }
-  return (
+
+return (
     <div>
-        <div className="admin-product-container">
+      {!showChangedProduct ? <>
+       <div className="admin-product-container">
             <div className="admin-product-image">
               <img src={data.imageURL} alt={data.imageURL} />
             </div>
@@ -46,20 +52,14 @@ const AdminProductDetailsComponent = () => {
               <input type="text" id='_product_URL' placeholder={data.imageURL} name = "imageURL" onChange={handleChange}/>
             </div>
             
-            
-           
-            
-           <div className='form-group-product'>
+            <div className='form-group-product'>
             <p className="category">Category: Clothes</p>
             </div>
 
-              <button className='btn btn-admin-change' onClick={() => changeProduct(formData)}>Change Product</button>
-              <button className='btn btn-admin-delete' onClick={() => deleteProduct(formData)}>Delete Product</button>
+              <button className='btn btn-admin-change' onClick={() => changeProduct(productId, formData, setShowChangedProduct(true))}>Change Product</button>
+              <button className='btn btn-admin-delete' onClick={() => deleteProduct(productId, formData )}>Delete Product</button>
           </div>
-          
-          
-          
-        </div> 
+          </div> 
        
            <div className="additional-info-container">
             <div className="button-row">
@@ -77,10 +77,12 @@ const AdminProductDetailsComponent = () => {
               </div>
             </div>
           </div>
+  </div> </>
+  : 
+  <ChangedProductComponent />
+}
   </div>
-      </div>
-    );
+  );
 };
-
 
 export default AdminProductDetailsComponent

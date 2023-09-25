@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { BsSearch, BsCart3 } from "react-icons/bs";
 import { FaTshirt } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
-import ShoppingCart from './shoppingcart/ShoppingCart';
-import { CartContext } from '../contexts/CartContext';
 import { UserContext } from '../contexts/UserContext';
 import { AdminContext } from '../contexts/AdminContext';
 import CartDropdown from './shoppingcart/CartDropdown';
@@ -15,20 +13,6 @@ const Navbar = () => {
   const navigate = useNavigate()
   const { user , setUser } = useContext(UserContext)
   const { admin, setAdmin } = useContext(AdminContext)
-  // console.log(admin)
-
-  const { totalQuantity, isToggled, setIsToggled } = useContext(CartContext);
-
-
-  // const toggleDropdown = () => {
-  //   setIsToggled(!isToggled);
-  // };
-  // useEffect(() => {
-  //   const storedUser = localStorage.getItem('user');
-  //   if (storedUser) {
-  //     setUser(JSON.parse(storedUser));
-  //   }
-  // }, []);
 
   const handleLogoutUser = () => {
     localStorage.removeItem('user-token');
@@ -42,7 +26,6 @@ const Navbar = () => {
 
  const goToDashboad = () => {
   navigate('/adminpage')
-    
  }
 
   return (
@@ -52,7 +35,7 @@ const Navbar = () => {
         <h1>TRENDY THREADS</h1>
         {admin ? <>
         <button className='btn btn-danger btn-sm handle-admin' onClick={handleLogoutAdmin}>Logout Admin</button>
-        <button className='btn btn-sm dashboard' onClick={goToDashboad} >Dashboard</button>
+        <button className='btn btn-sm dashboard' onClick={goToDashboad}>Dashboard</button>
         </>  :  <>
         <p></p>
         </>}

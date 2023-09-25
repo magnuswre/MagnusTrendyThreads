@@ -4,7 +4,6 @@ import { AdminOrderContext } from '../../contexts/AdminOrderContext'
 
 const AdminOrders = () => {
   const { orders } = useContext(AdminOrderContext)
-  console.log(orders)
 
   if(!orders){
     return

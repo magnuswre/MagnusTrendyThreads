@@ -3,7 +3,7 @@ import Collection from '../components/home/Collection'
 import HomeSale from '../components/home/HomeSale'
 import TopSellers from '../components/home/TopSellers'
 import NewsLetter from '../components/home/NewsLetter'
-import ProductContextProvider from '../contexts/ProductContext'
+// import ProductContextProvider from '../contexts/ProductContext'
 import Info_Admin from '../components/info_admin/info_admin'
 
 const Home = () => {
@@ -12,13 +12,13 @@ const Home = () => {
     <div>
       <HomeHero />
 
-      <ProductContextProvider limit={4}>
+      {/* <ProductContextProvider limit={4}> */}
         <Collection />
-      </ProductContextProvider>
+      {/* </ProductContextProvider> */}
 
-      <ProductContextProvider limit={2}>
+      {/* <ProductContextProvider limit={2}> */}
         <HomeSale />
-      </ProductContextProvider>
+      {/* </ProductContextProvider> */}
 
       <TopSellers />
       <NewsLetter />

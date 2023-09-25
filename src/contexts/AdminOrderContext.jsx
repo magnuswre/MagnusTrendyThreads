@@ -17,7 +17,7 @@ const AdminOrderContextProvider = ({ children }) => {
       
     const res = await axios.get('http://localhost:8080/api/order/allOrders')
           setOrders(res.data)
-          console.log(orders)
+          // console.log(orders)
 };
 
 useEffect(() => {

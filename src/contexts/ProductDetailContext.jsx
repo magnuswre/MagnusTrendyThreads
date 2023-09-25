@@ -7,8 +7,8 @@ export const ProductDetailContext = createContext();
 
 const ProductDetailsProvider = ({ children }) => {
   const [data, setData] = useState(null);
+  // const [resultData, setResultData] = useState({});
   const [loading, setLoading] = useState(true);
-
   const { productId } = useParams();
 
   useEffect(() => {
@@ -24,6 +24,28 @@ const ProductDetailsProvider = ({ children }) => {
 
     getProductById();
   }, [productId]);
+
+  const changeProduct = async (productId, formData) => {
+    const token = localStorage.getItem('admin-token');
+    const parse = JSON.parse(token);
+    try {
+      const result = await axios.put(`http://localhost:8080/api/product/${productId}`, formData, {
+        headers: {
+          Authorization: `Bearer ${parse}`,
+        },
+      });
+      console.log(formData);
+      console.log(result.data)
+      setData(result.data);
+    } catch (error) {
+      console.log('Error fetching data:', error);
+    }
+  };
+
+
+  
+
+ 
 
   const [quantity, setQuantity] = useState(1);
 
@@ -41,6 +63,7 @@ const ProductDetailsProvider = ({ children }) => {
     data,
     loading,
     quantity,
+    changeProduct,
     incrementQuantity,
     decrementQuantity
   };

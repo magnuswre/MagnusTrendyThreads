@@ -1,28 +1,29 @@
-import  { useState, useContext } from 'react'
-
-import { ProductContext } from '../../contexts/ProductContext'
+import React, { useState, useContext } from 'react';
+import { ProductContext } from '../../contexts/ProductContext';
 
 const AddedProduct = () => {
+  const { resultData } = useContext(ProductContext);
 
-    
-
-  const { resultData } = useContext(ProductContext)
-  console.log(resultData)
   return (
     <div>
-      {/* {data ? (
-        <div className='added-product'>
-          <h2>Product Successfully Added</h2>
-          <p>Product Details:</p>
-          <p>Name: {data.name}</p>
-          <p>Description: {data.description}</p>
-          <p>Price: {data.price}</p>
+      {resultData ? (
+        <div>
+          {resultData.map((product) => (
+            <div key={product._id} className='added-product-container'>
+              <h2>Product Successfully Added!</h2>
+              <img src={product.imageURL} alt={product.name} />
+              <p>Product Details:</p>
+              <p>Name: {product.name}</p>
+              <p>Description: {product.description}</p>
+              <p>Price: {product.price}</p>
+            </div>
+          ))}
         </div>
       ) : (
         <p>Loading product data...</p>
-      )} */}
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default AddedProduct
+export default AddedProduct;

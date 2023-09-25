@@ -8,10 +8,8 @@ const AdminOrderDetail = () => {
   const { orders, updateStatus } = useContext(AdminOrderContext)
    console.log(orders)
   const { orderId } = useParams()
-  console.log(orderId)
 
   const order = orders.find(order => order._id === orderId);
-  console.log(order)
   const [selectedRadio, setSelectedRadio] = useState(order?.status || 'radio1');
 
 

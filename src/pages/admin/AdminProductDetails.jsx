@@ -1,14 +1,14 @@
 import React from 'react'
 import AdminProductDetailsComponent from '../../components/info_admin/AdminProductDetailsComponent';
-// import ProductContext from '../../contexts/ProductContext';
+import ProductDetailsProvider from '../../contexts/ProductDetailContext';
 
 const AdminProductDetails = () => {
   
     return (
     <div>
-        {/* <ProductContext> */}
+         <ProductDetailsProvider>
             <AdminProductDetailsComponent />
-        {/* </ProductContext> */}
+         </ProductDetailsProvider>
     </div>
   )
 }

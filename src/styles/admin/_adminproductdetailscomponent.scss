@@ -1,9 +1,26 @@
+.changed-product-container{
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 40%;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  .changedproduct-title{
+    font-weight: 700;
+    border: 3px solid;
+    text-align: center;
+  }
+}
+
+
 .admin-product-container {
   border: 1px solid rgb(214, 214, 214);
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+    
+   
 
     input {
       width: 500px;

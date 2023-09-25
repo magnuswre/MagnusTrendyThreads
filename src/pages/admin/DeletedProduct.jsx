@@ -1,10 +1,20 @@
-import React from 'react'
+import { useContext} from 'react'
+import { ProductContext } from '../../contexts/ProductContext'
+
+
+
 
 const DeletedProduct = () => {
+
+    const { data } = useContext(ProductContext)
+  console.log(data)
+
   return (
-    <div className='deleted-product'> 
-      <h1>Product Successfully Deleted!</h1>
+    <div>
+        <h2>Product Successfully Deleted</h2>
     </div>
+
+
   )
 }
 
