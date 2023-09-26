@@ -4,22 +4,31 @@ import CartProduct from "../components/shoppingcart/CartProduct";
 import { OrderContext }  from "../contexts/OrderContext";
 import { UserContext } from "../contexts/UserContext";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
 
    const { submitOrder } = useContext(OrderContext)
    const { cartItems, totalQuantity, clearCart} = useContext(CartContext);
-   const { user  } = useContext(UserContext)
+   const { user } = useContext(UserContext)
+   const navigate = useNavigate()
   
-     const calculateTotal = () => {
-      let totalPrice = 0
-      cartItems.forEach(item => {
-        totalPrice = item.product.price * totalQuantity
-      })
-      return totalPrice
-    }
+   const calculateTotal = () => {
+    let totalPrice = 0;
+    cartItems.forEach((item) => {
+      totalPrice += item.product.price * totalQuantity; // Fix the calculation
+    });
+    return totalPrice;
+  };
 
-
+    const handleOrderSubmit = () => {
+      submitOrder(cartItems); // Submit the order
+  
+      // Clear the cart using clearCart from CartContext
+      clearCart();
+  
+      navigate("/ordersubmit");
+    };
   return (
 
     <>
@@ -39,7 +48,7 @@ const Checkout = () => {
          <button className="checkout btn btn-cart clear" onClick={clearCart}>Clear Cart</button>
          {user ? 
            <button className="checkout btn btn-cart info"  
-              onClick={() => submitOrder(cartItems)} >
+              onClick={handleOrderSubmit} >
               Submit Order</button> 
          : 
          <p> Please <Link to='/login' className="login-checkout">Login</Link> To Your Account </p> } 

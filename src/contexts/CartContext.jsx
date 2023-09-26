@@ -80,8 +80,6 @@ const CartProvider = ({ children }) => {
   const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   const checkOut = () => {
-
-    
     navigate('/checkout')
     setIsToggled(false)
     

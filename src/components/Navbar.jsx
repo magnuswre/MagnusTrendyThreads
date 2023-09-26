@@ -18,6 +18,7 @@ const Navbar = () => {
     localStorage.removeItem('user-token');
     localStorage.removeItem('user');
     setUser(null);
+    navigate('/')
   };
   const handleLogoutAdmin = () => {
     localStorage.removeItem('admin-token');

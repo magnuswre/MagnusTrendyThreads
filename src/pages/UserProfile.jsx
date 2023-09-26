@@ -31,6 +31,7 @@ const UserProfile = () => {
             {order.orderRows.map(row => (
               <li key={row._id}>
                 <p>Product: {row.product}</p>
+                
                 <p>Quantity: {row.quantity}</p>
               </li>
             ))}

@@ -8,14 +8,10 @@ export const OrderContext = createContext()
 const OrderContextProvider = ({ children }) => {
 
   const navigate = useNavigate()
-
   const { user } = useContext(UserContext)
   const [orders, setOrders] = useState([])
-   const [eventExecuted, setEventExecuted] = useState(false);
 
-  // console.log(orders)
-
-  const fetchOrders = async () => {
+ const fetchOrders = async () => {
     try {
       if (user) {
         const res = await axios.get('http://localhost:8080/api/order/allOrders')
@@ -40,7 +36,8 @@ const OrderContextProvider = ({ children }) => {
     const orderRows = cart.map(item => {
       return { 
         product: item.product._id,
-        quantity: item.quantity
+        quantity: item.quantity,
+        imageURL: item.product.imageURL
       }
     })
     
@@ -56,7 +53,8 @@ const OrderContextProvider = ({ children }) => {
             })
             // setOrders(result.data)
             console.log(result.data)
-
+            setOrders([])
+            navigate('/ordersubmit')
           } catch (error) {
           console.log("Error fetching data:", error);
         }
@@ -64,7 +62,8 @@ const OrderContextProvider = ({ children }) => {
     ;
       fetchData();
     }
-    navigate('/ordersubmit')
+    
+    
   }
  
 
