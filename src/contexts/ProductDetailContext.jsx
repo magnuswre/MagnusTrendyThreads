@@ -1,15 +1,16 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Loader from '../components/loader/Loader';
+import { ProductContext } from './ProductContext';
 
 export const ProductDetailContext = createContext();
 
 const ProductDetailsProvider = ({ children }) => {
   const [data, setData] = useState(null);
-  // const [resultData, setResultData] = useState({});
   const [loading, setLoading] = useState(true);
   const { productId } = useParams();
+  const productContext = useContext(ProductContext)
 
   useEffect(() => {
     const getProductById = async () => {
@@ -37,6 +38,8 @@ const ProductDetailsProvider = ({ children }) => {
       console.log(formData);
       console.log(result.data)
       setData(result.data);
+
+      productContext.updateProduct(result.data);
     } catch (error) {
       console.log('Error fetching data:', error);
     }

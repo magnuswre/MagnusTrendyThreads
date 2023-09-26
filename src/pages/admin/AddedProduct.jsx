@@ -10,12 +10,14 @@ const AddedProduct = () => {
         <div>
           {resultData.map((product) => (
             <div key={product._id} className='added-product-container'>
+              <div className='added-product'>
               <h2>Product Successfully Added!</h2>
               <img src={product.imageURL} alt={product.name} />
               <p>Product Details:</p>
               <p>Name: {product.name}</p>
               <p>Description: {product.description}</p>
               <p>Price: {product.price}</p>
+              </div>
             </div>
           ))}
         </div>

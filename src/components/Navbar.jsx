@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-import { BsSearch, BsCart3 } from "react-icons/bs";
+import { BsSearch } from "react-icons/bs";
 import { FaTshirt } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';

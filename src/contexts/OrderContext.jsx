@@ -67,25 +67,6 @@ const OrderContextProvider = ({ children }) => {
     navigate('/ordersubmit')
   }
  
-//  const updateStatus = async (orderId, status) => {
-//     console.log(status);
-//     try {
-//       if (user) {
-//         await axios.put(`http://localhost:8080/api/order/${orderId}`, { status }, {
-//           headers: {
-//             Authorization: `Bearer ${user}`
-//           }
-//         });
-//         setOrders(prevOrderData =>
-//           prevOrderData.map(order =>
-//             order._id === orderId ? { ...order, status } : order
-//               )
-//             );
-//           }
-//         } catch (error) {
-//           console.log('Error updating order status', error);
-//         }
-//       };
 
   useEffect(() => {
     fetchOrders()

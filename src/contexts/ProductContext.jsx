@@ -33,7 +33,8 @@ const ProductContextProvider = ({ children }) => {
         },
       });
 
-      setResultData(prevData => [...prevData, result.data]);
+      setData(prevData => [...prevData, result.data]);
+      setResultData(prevResultData => [...prevResultData, result.data]);
       navigate('/addedproduct')
     } catch (error) {
       console.log('Error fetching data:', error);
@@ -45,24 +46,33 @@ const ProductContextProvider = ({ children }) => {
     const parse = JSON.parse(token);
 
     try {
-      const result = await axios.delete(`http://localhost:8080/api/product/${productId}`, {
+       await axios.delete(`http://localhost:8080/api/product/${productId}`, {
         headers: {
           Authorization: `Bearer ${parse}`,
         },
       });
-      setData(result.data);
-      console.log(result.data);
+      setData(prevData => prevData.filter(product => product._id !== productId));
+      setResultData(prevResultData => prevResultData.filter(product => product._id !== productId));
       navigate('/deletedproduct')
     } catch (error) {
       console.log('Error fetching data:', error);
     }
   };
 
+  const updateProduct = (updatedProduct) => {
+    setData((prevData) =>
+      prevData.map((product) =>
+        product._id === updatedProduct._id ? updatedProduct : product
+      )
+    );
+  };
+
 const value = {
     data,
     resultData,
     postProduct,
-    deleteProduct
+    deleteProduct,
+    updateProduct
   };
 
   return (
